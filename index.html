@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <script src="https://kit.fontawesome.com/d9a26642d3.js" crossorigin="anonymous"></script>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <title>Todo-Xpress</title>
+  </head>
+  <style>
+    body{
+      background-color: #FFFFB1;
+    }
+    .navbar-brand{
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 30px;
+    }
+    .container{
+    
+      background-image: url(https://e0.pxfuel.com/wallpapers/616/2/desktop-wallpaper-white-aesthetic-cute-checkered.jpg);
+      background-size: cover;
+      width: 1800px;
+      height: 600px;
+      border-radius: 40px;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    @media screen and (max-width:450px){
+      body{
+        height:max-content;
+        width:412px;
+      }
+    .container{
+      margin:10px 20px;
+      width:380px;
+      height:720px;
+
+    }}
+    button{
+      height: 50px;
+      margin-top: 20px;
+     }
+     .text{
+      margin: 0px 20px;
+     }
+     .btn {
+      
+ width: 3.6em;
+ height: 2.3em;
+ margin: 0.5m;
+ background: black;
+ color: white;
+ border: none;
+ border-radius: 0.625em;
+ font-size: 20px;
+ font-weight: bold;
+ cursor: pointer;
+ margin-left: 110px;
+ margin-right: 0;
+ z-index: 1;
+ overflow: hidden;
+}
+
+
+    
+
+    .area{
+       height: 50px;
+       padding-right: 100px;
+       margin-top: 20px;
+       border-radius: 0.625em;
+       margin-bottom: 0;
+    }
+    div.text{
+      margin-bottom: 0;
+      width:340px;
+      height:50px;
+     }
+.str{
+  margin: 0px 20px;
+}
+
+.del-btn{
+  width:30px;
+  height:30px;
+  color:red;
+  font-weight: bolder;
+  background-color: white;
+  border: 0.5px solid black;
+  border-radius: 0.325em;
+  margin-left: 20px;
+}
+ul{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+ul li{
+  list-style: none;
+  font-size: 25px;
+  padding: 8px 8px 1px 5px;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  background-color: white;
+  border-radius: 20px;
+}
+ul>li::before{
+  content:'';
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border: 50%;
+  background-image: url(https://i.ibb.co/hdsdTvL/unchecked.png);
+  background-size: cover;
+  background-position: center;
+  left:-30px;
+  bottom:3px
+}
+ul>li.checked{
+text-decoration: line-through;
+}
+ul>li.checked::before{
+  background-image: url(https://i.ibb.co/fHhGG1R/checked.png);
+}
+ul>li>span{
+  position:absolute;
+  right:0;
+  top : ;
+  width:40px;
+  height:40px;
+  font-size:22px;
+  font-weight: bolder;
+  color:#555;
+  text-align: center;
+
+}
+ul>li>span:hover{
+   background: #edeef0;
+   border:1px solid black;
+   border-radius: 50%;
+} 
+  </style>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary-dark" >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" >Todo-Xpress <i class="fas fa-check-double    "></i> </a>
+       
+        </div>
+      </div>
+    </nav>
+    <div class="container" id="container">
+      <h3></h3>
+      <div class="text"><input type="text" id="todo-input" placeholder="    Enter Task..." class="area"><button class="btn" id="add-button" onclick="addTask()">Add</button>
+        <ul id="list-container">
+          <!--<li class="checked">task1</li>
+          <li>task2</li>
+          <li>task3</li>-->
+        </ul>
+      
+       
+      </div>
+     
+      
+     <script>
+      const inputBox = document.getElementById("todo-input")
+      const listContainer = document.getElementById("list-container")
+
+      function addTask(){
+        if(inputBox.value === ''){
+          alert("Add task!")
+        }
+        else{
+          let li=document.createElement("li")
+          li.innerHTML = inputBox.value
+          listContainer.appendChild(li);
+          let span = document.createElement("span")
+          span.innerHTML = "\u00d7";
+          li.appendChild(span);
+        }
+        inputBox.value = "";
+        saveData();
+      }
+      listContainer.addEventListener("click",function(e){
+        if (e.target.tagName ==="LI"){
+          e.target.classList.toggle("checked");
+          saveData();
+        }
+        else if (e.target.tagName==="SPAN"){
+          e.target.parentElement.remove();
+          saveData();
+        }
+      },false)
+      function saveData(){
+        localStorage.setItem("data",listContainer.innerHTML)
+      }
+      function showTask(){
+        listContainer.innerHTML = localStorage.getItem("data")
+      }
+      showTask();
+     </script>
+    </div>
+  </body>
+</html>
